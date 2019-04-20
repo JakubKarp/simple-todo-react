@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uniqid from 'uniqid';
 import './App.css';
 import Tasks from './components/Tasks';
 import Form from './components/Form';
@@ -13,15 +14,28 @@ class App extends Component {
         {id: 1, name: "jedzenie", hour: 11, minutes: 11}
       ],
       newTask: {
-        id: Number, name: "", hour: Number, minutes: Number
+        id: uniqid(), name: "", hour: "", minutes: ""
       }
     }
     this.newTaskHandler = this.newTaskHandler.bind(this)
+    this.saveTaskHandler = this.saveTaskHandler.bind(this)
   }
 
   newTaskHandler(val) {
-    console.log(val);
-    
+    this.setState( prevState => {
+      return {
+        newTask: Object.assign(prevState.newTask, val)
+      }
+    })   
+  }
+
+  saveTaskHandler() {
+    this.setState( prevState => ({
+      tasks: [...prevState.tasks, prevState.newTask],
+      newTask: {
+        id: uniqid(), name: "", hour: "", minutes: ""
+      }
+    }))
   }
 
 
@@ -34,8 +48,14 @@ class App extends Component {
       <div className="App">
         <div>
           {tasks}
-          <Form newTask={val => this.newTaskHandler(val)} />
-          <Actions />
+          <Form newTask={val => this.newTaskHandler(val)}
+            
+            name={this.state.newTask.name}
+            hour={this.state.newTask.hour}
+            minutes={this.state.newTask.minutes}
+
+          />
+          <Actions saveTask={() => this.saveTaskHandler()} />
         </div>
       </div>
     );

@@ -32,6 +32,7 @@ const Form = (props) => {
                     type="text"
                     id="name"
                     name="name"
+                    value={props.name}
                     onChange={e => props.newTask({ [e.target.name]: e.target.value })} 
                 />
             </div>
@@ -41,7 +42,8 @@ const Form = (props) => {
                     style={styleInput} 
                     type="tel"
                     id="hour"
-                    name="hour" 
+                    name="hour"
+                    value={props.hour} 
                     onChange={e => props.newTask({ [e.target.name]: e.target.value })}
                 />
             </div>
@@ -51,7 +53,8 @@ const Form = (props) => {
                     style={styleInput} 
                     type="tel"
                     id="minutes"
-                    name="minutes" 
+                    name="minutes"
+                    value={props.minutes} 
                     onChange={e => props.newTask({ [e.target.name]: e.target.value })}
                 />
             </div>    
