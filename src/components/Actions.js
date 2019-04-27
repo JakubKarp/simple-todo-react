@@ -18,7 +18,7 @@ const Actions = (props) => {
     return (
         <div style={actionContainer} >
             <div onClick={() => props.saveTask()} style={styleActions}>Dodaj</div>
-            <div style={styleActions}>Usuń</div>
+            {/* <div style={styleActions}>Usuń</div> */}
         </div>
     )
     

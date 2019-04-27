@@ -12,7 +12,11 @@ const Tasks = (props) => {
     }
 
     return (
-        <div style={styleTask}>
+        <div 
+            style={styleTask}
+            onClick={() => props.click(props.idElement)} 
+        >
+        
             <span>{props.name}</span>
             <span> {props.hour}</span>
             <span>:{props.minutes}</span>
