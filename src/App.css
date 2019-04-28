@@ -10,4 +10,11 @@ body{
   
 }
 
+.task{
+  background: #8C7AAE
+}
+.task:hover{
+  background: indianred
+}
+
 
