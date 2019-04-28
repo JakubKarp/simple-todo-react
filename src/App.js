@@ -21,6 +21,7 @@ class App extends Component {
     this.newTaskHandler = this.newTaskHandler.bind(this)
     this.saveTaskHandler = this.saveTaskHandler.bind(this)
     this.deleteTask = this.deleteTask.bind(this)
+    // this.onHover = this.onHover.bind(this)
   }
 
   newTaskHandler(val) {
@@ -51,17 +52,20 @@ class App extends Component {
     })    
   }
 
+  // onHover(element) {
+  //   element.setAttribute("style", "background: red")
+  // }
+
   render() {
     const tasks = this.state.tasks.map( (el) => {
-      console.log("el.id", el.id);
-      
       return <Tasks 
         key={el.id}
         idElement={el.id}
         name={el.name} 
         hour={el.hour} 
         minutes={el.minutes}
-        click={this.deleteTask}  
+        click={this.deleteTask}
+        // hover={this.onHover}  
       />  
     })   
 
