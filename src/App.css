@@ -13,8 +13,14 @@ body{
 .task{
   background: #8C7AAE
 }
+.deleteTask{
+  float: right;
+  display: none;
+  cursor: pointer;  
+}
 .task:hover{
   background: indianred
 }
-
-
+.task:hover .deleteTask{
+  display: inline;
+}

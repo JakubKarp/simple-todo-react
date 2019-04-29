@@ -13,12 +13,13 @@ const Tasks = (props) => {
     return (
         <div 
             className="task"
-            style={styleTask}
-            onClick={() => props.click(props.idElement)}              
+            style={styleTask}                          
         >
-            <span>{props.name}</span>
-            <span> {props.hour}</span>
-            <span>:{props.minutes}</span>
+            {props.name} - {props.hour}:{props.minutes}
+            <div
+                className="deleteTask"
+                onClick={() => props.click(props.idElement)}
+            >x</div>            
         </div>
     )
 }

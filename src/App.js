@@ -44,12 +44,9 @@ class App extends Component {
   }
 
   deleteTask(id) {
-    let afterDeleted = this.state.tasks.filter(
-      item => item.id !== id
-    )
-    this.setState({
-      tasks: afterDeleted
-    })    
+    this.setState(prevState => ({
+      tasks: prevState.tasks.filter(item => item.id !== id)
+    }))    
   }
 
   // onHover(element) {
