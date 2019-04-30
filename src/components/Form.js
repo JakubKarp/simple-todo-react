@@ -1,4 +1,5 @@
 import React from 'react';
+import { isValidNumberInput } from '../utils'
 
 const Form = (props) => {
     const formContainer = {
@@ -33,6 +34,7 @@ const Form = (props) => {
                     id="name"
                     name="name"
                     value={props.name}
+                    
                     onChange={e => props.newTask({ [e.target.name]: e.target.value })} 
                 />
             </div>
@@ -44,6 +46,7 @@ const Form = (props) => {
                     id="hour"
                     name="hour"
                     value={props.hour} 
+                    onKeyPress={e => isValidNumberInput(e)}
                     onChange={e => props.newTask({ [e.target.name]: e.target.value })}
                 />
             </div>
@@ -55,6 +58,7 @@ const Form = (props) => {
                     id="minutes"
                     name="minutes"
                     value={props.minutes} 
+                    onKeyPress={e => isValidNumberInput(e)}
                     onChange={e => props.newTask({ [e.target.name]: e.target.value })}
                 />
             </div>    

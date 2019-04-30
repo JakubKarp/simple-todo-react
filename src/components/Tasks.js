@@ -15,11 +15,19 @@ const Tasks = (props) => {
             className="task"
             style={styleTask}                          
         >
+            <div className="bodyTask">
             {props.name} - {props.hour}:{props.minutes}
+            </div>
+            <div
+                className="editTask"
+                onClick={() => {props.edit(props.idElement)}}
+            >&#9998;</div>
             <div
                 className="deleteTask"
-                onClick={() => props.click(props.idElement)}
-            >x</div>            
+                onClick={() => props.delete(props.idElement)}
+            >&#10006;</div>
+
+
         </div>
     )
 }

@@ -11,16 +11,26 @@ body{
 }
 
 .task{
-  background: #8C7AAE
+  background: #8C7AAE;
+  display: grid;
+  grid-template-columns: 1fr auto auto
 }
 .deleteTask{
-  float: right;
-  display: none;
+  visibility: hidden;
   cursor: pointer;  
 }
 .task:hover{
   background: indianred
 }
-.task:hover .deleteTask{
-  display: inline;
+.task:hover .deleteTask, 
+.task:hover .editTask {
+  visibility: visible
+}
+.bodyTask{
+  
+}
+.editTask{
+  visibility: hidden;
+  margin-right: 10px;
+  cursor: pointer;
 }
