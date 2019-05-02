@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes  from 'prop-types';
-import { hourMinuteToSeconds, secondsToHourMinuteSecond } from "../utils"
+import { hourMinuteToSeconds, secondsToHourMinuteSecond } from "../utils";
+import Overlay from './Overlay/Overlay';
 
 const Tasks = (props) => {
     const styleTask = {
@@ -30,6 +31,10 @@ const Tasks = (props) => {
                 className="deleteTask"
                 onClick={() => props.delete(props.idElement)}
             >&#10006;</div>
+            <Overlay>
+                <h1>{props.name}</h1>
+                <p>{props.hour.toString().padStart(2,0)}:{props.minutes.toString().padStart(2,0)}</p>
+            </Overlay>
 
 
         </div>

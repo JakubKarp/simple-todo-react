@@ -3,16 +3,14 @@ body{
 }
 
 .App {
-  text-align: center;
   display: grid;
-  justify-items: center;
-  
+  justify-items: center;  
 }
 
 .task{
   background: #8C7AAE;
   display: grid;
-  grid-template-columns: 1fr auto auto
+  grid-template-columns: 1fr auto auto auto
 }
 .deleteTask{
   visibility: hidden;
@@ -22,7 +20,8 @@ body{
   background: indianred
 }
 .task:hover .deleteTask, 
-.task:hover .editTask {
+.task:hover .editTask,
+.task:hover .overlay {
   visibility: visible
 }
 .bodyTask{

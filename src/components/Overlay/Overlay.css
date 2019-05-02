@@ -1,0 +1,22 @@
+.overlay {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    visibility: hidden;
+}
+
+.overlay__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.911);
+    color: black;
+    padding: 50px;
+    display: none;
+}
+
+.overlay__modal--visible{
+    display: block;
+}

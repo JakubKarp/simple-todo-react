@@ -54,6 +54,9 @@ class App extends Component {
   //JSON.stringify() - zamienia z obiektu na string
   //w localStorage trzymane są stringi
   //window.localStorage.length > 0 - tak można sprawdzić, czy localStorage jest pusty
+  //zapisywanie - localStorage.setItem("nazwa obiektu", this.state.something)
+  //odczytywanie -  localStorage.getItem("nazwa obiektu")
+   
 
   componentWillUnmount() {
     clearInterval(this.state.intervalId)
