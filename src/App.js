@@ -10,18 +10,44 @@ class App extends Component {
     super();
     this.state = {
       tasks: [
-        {id: 0, name: "spanie", hour: 10, minutes: 12},
-        {id: 1, name: "jedzenie", hour: 11, minutes: 11}
+        {id: 0, name: "śniadanie", hour: 10, minutes: 12},
+        {id: 1, name: "obiad", hour: 16, minutes: 11},
+        {id: 2, name: "kolacja", hour: 19, minutes: 2}
       ],
       newTask: {
         id: uniqid(), name: "", hour: -1, minutes: -1
+      },
+      now: {
+        hour: new Date().getHours(),
+        minutes: new Date().getMinutes(),
+        seconds: new Date().getSeconds()
       }
     }
+    this.timer = this.timer.bind(this)
     this.newTaskHandler = this.newTaskHandler.bind(this)
     this.saveTaskHandler = this.saveTaskHandler.bind(this)
     this.deleteTaskHandler = this.deleteTaskHandler.bind(this)
     this.editTaskHandler = this.editTaskHandler.bind(this)
     this.cancelEditTaskHandler = this.cancelEditTaskHandler.bind(this)
+  }
+
+  timer() {
+    this.setState({
+      now: {
+        hour: new Date().getHours(),
+        minutes: new Date().getMinutes(),
+        seconds: new Date().getSeconds()
+      }
+    })
+  }
+
+  componentDidMount() {
+    const intervalId = setInterval(this.timer, 1000);
+    this.setState({intervalId: intervalId})
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId)
   }
 
   newTaskHandler(val) {
@@ -98,6 +124,7 @@ class App extends Component {
         minutes={el.minutes}
         delete={this.deleteTaskHandler}
         edit={this.editTaskHandler}
+        timeNow={this.state.now}
          
       />  
     })   

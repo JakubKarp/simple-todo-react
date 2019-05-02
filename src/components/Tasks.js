@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes  from 'prop-types';
+import { hourMinuteToSeconds, secondsToHourMinuteSecond } from "../utils"
 
 const Tasks = (props) => {
     const styleTask = {
@@ -10,6 +11,11 @@ const Tasks = (props) => {
         "margin": "1px 0",
         "color": "#ddd"
     }
+
+    const taskInSeconds = hourMinuteToSeconds(props.hour, props.minutes);
+    const nowInSeconds = hourMinuteToSeconds(props.timeNow.hour, props.timeNow.minutes) + props.timeNow.seconds
+    const difference = taskInSeconds - nowInSeconds;
+    const diffText = difference > 0 ? secondsToHourMinuteSecond(difference) : "jutro";
     
     return (
         <div 
@@ -17,7 +23,7 @@ const Tasks = (props) => {
             style={styleTask}                          
         >
             <div className="bodyTask">
-            {props.name} - {props.hour}:{props.minutes}
+            {props.name} - {diffText}
             </div>
             <div className="editTask" onClick={() => {props.edit(props.idElement)}} >&#9998;</div>
             <div
@@ -35,7 +41,12 @@ Tasks.propTypes = {
     hour: PropTypes.number,
     minutes: PropTypes.number,
     edit: PropTypes.func,
-    delete: PropTypes.func
+    delete: PropTypes.func,
+    timeNow: PropTypes.shape({
+        hour: PropTypes.number,
+        minutes: PropTypes.number,
+        seconds: PropTypes.number
+    })
 
 }
 
