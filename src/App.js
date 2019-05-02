@@ -42,9 +42,18 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const storageTasks = JSON.parse(localStorage.getItem("tasks"));
+    const emptyLocalStorage = window.localStorage.length > 0 ? storageTasks: this.state.tasks;
+		this.setState({tasks: emptyLocalStorage})
+
     const intervalId = setInterval(this.timer, 1000);
     this.setState({intervalId: intervalId})
   }
+
+  //JSON.parse() - zamienia ze stringa na obiekyt
+  //JSON.stringify() - zamienia z obiektu na string
+  //w localStorage trzymane są stringi
+  //window.localStorage.length > 0 - tak można sprawdzić, czy localStorage jest pusty
 
   componentWillUnmount() {
     clearInterval(this.state.intervalId)
@@ -82,8 +91,12 @@ class App extends Component {
         }
       }
 
-    })
-     
+    }, () => localStorage.setItem("tasks", JSON.stringify(this.state.tasks)))
+
+    //na końcu setState można wywołać funkcję callback
+    //czyli o wykonaniu setSteta - wszystkiego co on ma zrobić, wowołujemy funkcję
+
+    //prosta wersja powyższej funkcji- zobacz jak jest dopisywany newTask do tablicy - do istniejących w niej wartości 
     // this.setState( prevState => ({
     //   tasks: [...prevState.tasks, prevState.newTask],
     //   //do tablicy wcześniejszych obiektów dodaje nowy obiekt
@@ -96,7 +109,7 @@ class App extends Component {
   deleteTaskHandler(id) {
 		this.setState(prevState => ({
       tasks: prevState.tasks.filter(item => item.id !== id)
-    }))    
+    }), () => localStorage.setItem("tasks", JSON.stringify(this.state.tasks)))    
   }
 
   editTaskHandler(id) {
