@@ -1,5 +1,11 @@
 import React from 'react';
-import { isValidNumberInput } from '../utils'
+import { 
+    isValidNumberInput, 
+    parseInputAsNumber, 
+    isValidName, 
+    isValidHour, 
+    isValidMinutes 
+} from '../utils'
 
 const Form = (props) => {
     const formContainer = {
@@ -23,6 +29,14 @@ const Form = (props) => {
         "padding": "4px",
         "width" : "50%"
     }
+    const actionContainer = {
+        "margin": "16px 0 0",
+        "display": "grid",
+        "justifyItems": "center"
+    }
+    
+    const isFormValid = isValidName(props.name) && isValidHour(props.hour) && isValidMinutes(props.minutes);
+	const isFormEmpty = props.name === "" && props.hour === -1 && props.minutes === -1;
 
     return (
         <div style={formContainer}>
@@ -45,9 +59,9 @@ const Form = (props) => {
                     type="tel"
                     id="hour"
                     name="hour"
-                    value={props.hour} 
+                    value={props.hour === -1 ? "" : props.hour} 
                     onKeyPress={e => isValidNumberInput(e)}
-                    onChange={e => props.newTask({ [e.target.name]: e.target.value })}
+                    onChange={e => props.newTask({ [e.target.name]: parseInputAsNumber(e.target.value) })}
                 />
             </div>
             <div style={styleForm}>
@@ -57,11 +71,24 @@ const Form = (props) => {
                     type="tel"
                     id="minutes"
                     name="minutes"
-                    value={props.minutes} 
+                    value={props.minutes === -1 ? "" : props.minutes} 
                     onKeyPress={e => isValidNumberInput(e)}
-                    onChange={e => props.newTask({ [e.target.name]: e.target.value })}
+                    onChange={e => props.newTask({ [e.target.name]: parseInputAsNumber(e.target.value) })}
                 />
-            </div>    
+            </div>
+            <div style={actionContainer} >
+                <button
+                    className="actionButton" 
+                    onClick={() => props.saveTask()}
+                    disabled={!isFormValid} 
+                >Dodaj</button>
+                <button
+                    className="actionButton" 
+                    onClick={() => props.cancelEdit()}
+                    disabled={isFormEmpty} 
+                >Skasuj</button>            
+            </div>
+        
         </div>
     )
     

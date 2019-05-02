@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes  from 'prop-types';
 
 const Tasks = (props) => {
     const styleTask = {
@@ -18,10 +19,7 @@ const Tasks = (props) => {
             <div className="bodyTask">
             {props.name} - {props.hour}:{props.minutes}
             </div>
-            <div
-                className="editTask"
-                onClick={() => {props.edit(props.idElement)}}
-            >&#9998;</div>
+            <div className="editTask" onClick={() => {props.edit(props.idElement)}} >&#9998;</div>
             <div
                 className="deleteTask"
                 onClick={() => props.delete(props.idElement)}
@@ -32,6 +30,13 @@ const Tasks = (props) => {
     )
 }
 
+Tasks.propTypes = {
+    name: PropTypes.string,
+    hour: PropTypes.number,
+    minutes: PropTypes.number,
+    edit: PropTypes.func,
+    delete: PropTypes.func
 
+}
 
 export default Tasks;

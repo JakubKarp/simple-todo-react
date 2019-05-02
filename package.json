@@ -23,7 +23,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "react-flip-move": "^3.0.3"
-  }
+  "devDependencies": {}
 }

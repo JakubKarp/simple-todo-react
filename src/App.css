@@ -4,9 +4,8 @@ body{
 
 .App {
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
   
 }
 
@@ -27,10 +26,24 @@ body{
   visibility: visible
 }
 .bodyTask{
-  
+   
 }
 .editTask{
   visibility: hidden;
   margin-right: 10px;
   cursor: pointer;
+}
+.actionButton {
+  font-size: 18px;
+  width: 330px;
+  background: #a52a2a;
+  border: 5px solid #ddd; 
+  padding: 10px;
+  margin: 1px 0;
+  color: #ddd;
+  text-transform: uppercase;
+  cursor: pointer
+}
+.actionButton:disabled{
+  background: #ad7474;
 }

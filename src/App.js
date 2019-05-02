@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import uniqid from 'uniqid';
-import FlipMove from 'react-flip-move';
 import './App.css';
 import Tasks from './components/Tasks';
 import Form from './components/Form';
-import Actions from './components/Actions';
+
 
 class App extends Component {
   constructor() {
@@ -15,13 +14,14 @@ class App extends Component {
         {id: 1, name: "jedzenie", hour: 11, minutes: 11}
       ],
       newTask: {
-        id: uniqid(), name: "", hour: "", minutes: ""
+        id: uniqid(), name: "", hour: -1, minutes: -1
       }
     }
     this.newTaskHandler = this.newTaskHandler.bind(this)
     this.saveTaskHandler = this.saveTaskHandler.bind(this)
     this.deleteTaskHandler = this.deleteTaskHandler.bind(this)
     this.editTaskHandler = this.editTaskHandler.bind(this)
+    this.cancelEditTaskHandler = this.cancelEditTaskHandler.bind(this)
   }
 
   newTaskHandler(val) {
@@ -52,7 +52,7 @@ class App extends Component {
       return {
         tasks: updatedEvents,
         newTask: {
-          id: uniqid(), name: "", hour: "", minutes: ""
+          id: uniqid(), name: "", hour: -1, minutes: -1
         }
       }
 
@@ -74,17 +74,21 @@ class App extends Component {
   }
 
   editTaskHandler(id) {
-		console.log("TCL: App -> editTaskHandler -> id", id)
-    //this.state.tasks
-		console.log("TCL: App -> editTaskHandler -> this.state.tasks", this.state.tasks[id])
-    this.setState(prevState => ({
+		this.setState(prevState => ({
       newTask: {...prevState.tasks[id]}
     }))
   }
 
+  cancelEditTaskHandler() {
+    this.setState({
+      newTask: {
+        id: uniqid(), name: "", hour: -1, minutes: -1
+      }
+    })
+  }
+
   render() {
     const tasks = this.state.tasks.map( (el) => {
-      console.log("el.id", el.id);
       
       return <Tasks 
         key={el.id}
@@ -100,17 +104,16 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div style={{ position: 'relative' }}>
-          {/* <FlipMove duration={5000} easing="ease-out"> */}
-            {tasks}
-          {/* </FlipMove> */}
+        <div>
+          {tasks}          
           <Form 
-            newTask={val => this.newTaskHandler(val)}
             name={this.state.newTask.name}
             hour={this.state.newTask.hour}
             minutes={this.state.newTask.minutes}
+            newTask={val => this.newTaskHandler(val)}
+            saveTask={() => this.saveTaskHandler()}
+            cancelEdit={() => this.cancelEditTaskHandler()}
           />
-          <Actions saveTask={() => this.saveTaskHandler()} />
         </div>
       </div>
     );
